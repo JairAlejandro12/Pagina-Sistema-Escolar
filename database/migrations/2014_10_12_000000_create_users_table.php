@@ -19,6 +19,17 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('apellido_Paterno');
+            $table->string('apellido_Materno');
+            $table->string('telefono');
+            $table->string('telefono_Emergencia');
+            $table->string('grado_Acedemico');
+            $table->string('especialidad');
+            $table->string('sub_Especialidad');
+            $table->string('horas_x_Mes');
+            $table->string('alergias');
+            $table->string('enfermedades_Patologicas');
+            $table->string('tipo_Rol');
             $table->rememberToken();
             $table->timestamps();
         });
