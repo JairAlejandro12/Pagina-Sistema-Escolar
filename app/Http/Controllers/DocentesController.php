@@ -50,7 +50,7 @@ class DocentesController extends Controller
             $docente->apellido_Materno = $request->apellido_Materno;
             $docente->telefono = $request->telefono;
             $docente->telefono_Emergencia = $request->telefono_Emergencia;
-            $docente->grado_Acedemico = $request->grado_Academico;
+            $docente->grado_Academico = $request->grado_Academico;
             $docente->especialidad = $request->especialidad;
             $docente->sub_Especialidad = $request->sub_Especialidad;
             $docente->horas_x_Mes = $request->horas_x_Mes;
@@ -84,7 +84,8 @@ class DocentesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $docenteSelected = User::findOrFail($id);
+        return view('docentes.edit', compact('docenteSelected'));
     }
 
     /**
@@ -95,8 +96,25 @@ class DocentesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+
     {
-        //
+        $docente = User::find($id);
+        $docente->name = $request->name;
+        $docente->email = $request->email;
+        $docente->apellido_Paterno = $request->apellido_Paterno;
+        $docente->apellido_Materno = $request->apellido_Materno;
+        $docente->telefono = $request->telefono;
+        $docente->telefono_Emergencia = $request->telefono_Emergencia;
+        $docente->grado_Academico = $request->grado_Academico;
+        $docente->especialidad = $request->especialidad;
+        $docente->sub_Especialidad = $request->sub_Especialidad;
+        $docente->horas_x_Mes = $request->horas_x_Mes;
+        $docente->alergias = $request->alergias;
+        $docente->enfermedades_Patologicas = $request->enfermedades_Patologicas;
+        $docente->tipo_Rol = $request->tipo_Rol;
+        $docente->save();
+
+        return redirect()->route('docentes.index')->with('update', 'Docente Actualizado');
     }
 
     /**
@@ -108,5 +126,7 @@ class DocentesController extends Controller
     public function destroy($id)
     {
         //
+        $docente = User::find($id)->delete();
+        return redirect('/docentes')->with('destroy', 'x');
     }
 }

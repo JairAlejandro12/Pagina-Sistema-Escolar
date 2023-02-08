@@ -27,9 +27,15 @@
                     <td>{{$docente->apellido_Paterno}}</td>
                     <td>{{$docente->telefono}}</td>
                     <td>
-                        <a href="{{route('docentes.show',['docente' => $docente->id])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                        <a href="" class="btn btn-secondary"><i class="fa-solid fa-user-pen"></i></a>
-                        <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="{{route('docentes.show',['docente' => $docente->id])}}" class="btn btn-primary"><i
+                                class="fa-solid fa-eye"></i></a>
+                        <a href="{{route('docentes.edit', ['docente' => $docente->id])}}" class="btn btn-secondary"><i
+                                class="fa-solid fa-user-pen"></i></a>
+                        <form action="{{route('docentes.destroy', ['docente' => $docente->id])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -43,6 +49,30 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Docente creado',
+                showConfirmButton: true,
+                timer: 1500
+            }).then(function () {
+                location.reload();
+            });
+        </script>
+    @endif
+    @if (session('update'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Docente actualizado con exito',
+                showConfirmButton: true,
+                timer: 1500
+            }).then(function () {
+                location.reload();
+            });
+        </script>
+    @endif
+    @if (session('destroy'))
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: 'Docente eliminado con exito',
                 showConfirmButton: true,
                 timer: 1500
             }).then(function () {

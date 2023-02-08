@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'apellido_Materno' => 'No aplica',
             'telefono' => 'No aplica',
             'telefono_Emergencia' => 'No aplica',
-            'grado_Acedemico' => 'No aplica',
+            'grado_Academico' => 'No aplica',
             'horas_x_Mes' => 'No aplica',
             'alergias' => 'No aplica',
             'enfermedades_Patologicas' => 'No aplica',

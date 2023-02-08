@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('apellido_Materno');
             $table->string('telefono');
             $table->string('telefono_Emergencia');
-            $table->string('grado_Acedemico');
+            $table->string('grado_Academico');
             $table->string('especialidad');
             $table->string('sub_Especialidad');
             $table->string('horas_x_Mes');
