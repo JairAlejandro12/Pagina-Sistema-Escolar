@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DocenteRequest;
 use App\Models\User;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
@@ -17,7 +18,8 @@ class DocentesController extends Controller
      */
     public function index()
     {
-        return view('docentes.index');
+        $docentes = User::all();
+        return view('docentes.index', compact('docentes'));
     }
 
     /**
@@ -41,20 +43,20 @@ class DocentesController extends Controller
         try {
             $password = Str::random(8);
             $docente = new User();
-            $docente->name = Crypt::encryptString($request->name);
-            $docente->email = Crypt::encryptString($request->email);
+            $docente->name = $request->name;
+            $docente->email = $request->email;
             $docente->password = bcrypt($password);
-            $docente->apellido_Paterno = Crypt::encryptString($request->apellido_Paterno);
-            $docente->apellido_Materno = Crypt::encryptString($request->apellido_Materno);
-            $docente->telefono = Crypt::encryptString($request->telefono);
-            $docente->telefono_Emergencia = Crypt::encryptString($request->telefono_Emergencia);
-            $docente->grado_Acedemico = Crypt::encryptString($request->grado_Academico);
-            $docente->especialidad = Crypt::encryptString($request->especialidad);
-            $docente->sub_Especialidad = Crypt::encryptString($request->sub_Especialidad);
-            $docente->horas_x_Mes = Crypt::encryptString($request->horas_x_Mes);
-            $docente->alergias = Crypt::encryptString($request->alergias);
-            $docente->enfermedades_Patologicas = Crypt::encryptString($request->enfermedades_Patologicas);
-            $docente->tipo_Rol = Crypt::encryptString($request->tipo_Rol);
+            $docente->apellido_Paterno = $request->apellido_Paterno;
+            $docente->apellido_Materno = $request->apellido_Materno;
+            $docente->telefono = $request->telefono;
+            $docente->telefono_Emergencia = $request->telefono_Emergencia;
+            $docente->grado_Acedemico = $request->grado_Academico;
+            $docente->especialidad = $request->especialidad;
+            $docente->sub_Especialidad = $request->sub_Especialidad;
+            $docente->horas_x_Mes = $request->horas_x_Mes;
+            $docente->alergias = $request->alergias;
+            $docente->enfermedades_Patologicas = $request->enfermedades_Patologicas;
+            $docente->tipo_Rol = $request->tipo_Rol;
             $docente->save();
         } catch (\PDOException $e) {
             return back()->withError("El email ya se encuentra registrado en sistema")->withInput();
@@ -70,7 +72,8 @@ class DocentesController extends Controller
      */
     public function show($id)
     {
-        //
+        $docente = User::find($id);
+        return view('docentes.show', compact('docente'));
     }
 
     /**

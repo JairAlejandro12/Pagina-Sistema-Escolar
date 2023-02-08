@@ -20,17 +20,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row"></th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="" class="btn btn-secondary"><i class="fa-solid fa-user-pen"></i></a>
-                    <a href="" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                    <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                </td>
-            </tr>
+            @foreach($docentes as $docente)
+                <tr>
+                    <th scope="row">{{$docente->id}}</th>
+                    <td>{{$docente->name}}</td>
+                    <td>{{$docente->apellido_Paterno}}</td>
+                    <td>{{$docente->telefono}}</td>
+                    <td>
+                        <a href="{{route('docentes.show',['docente' => $docente->id])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                        <a href="" class="btn btn-secondary"><i class="fa-solid fa-user-pen"></i></a>
+                        <a href="" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -43,7 +45,7 @@
                 title: 'Docente creado',
                 showConfirmButton: true,
                 timer: 1500
-            }).then(function() {
+            }).then(function () {
                 location.reload();
             });
         </script>
