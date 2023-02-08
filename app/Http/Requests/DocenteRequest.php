@@ -24,7 +24,18 @@ class DocenteRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'name' => 'required',
+            'email' => 'required|email:dns',
+            'apellido_Paterno' => 'required',
+            'apellido_Materno' => 'required',
+            'telefono' => 'required',
+            'telefono_Emergencia' => 'required',
+            'grado_Academico' => 'required',
+            'especialidad' => 'required',
+            'sub_Especialidad' => 'required',
+            'horas_x_Mes' => 'required',
+            'enfermedades_Patologicas' => 'required',
+            'tipo_Rol' => 'required',
         ];
     }
 }

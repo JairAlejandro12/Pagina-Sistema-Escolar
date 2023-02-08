@@ -10,11 +10,27 @@
     </div>
     <br>
     <div class="row">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
         <form class="form-floating" method="post" action="{{route('docentes.store')}}">
             @csrf
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Nombre</span>
                 <input type="text" class="form-control" name="name">
+            </div>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="addon-wrapping">Email</span>
+                <input type="email" class="form-control" name="email">
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Apellido Paterno</span>
@@ -46,7 +62,7 @@
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Horas por cubrir</span>
-                <input type="text" class="form-control" name="horas_x_Cubrir">
+                <input type="number" class="form-control" name="horas_x_Mes">
             </div>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping">Alergias</span>

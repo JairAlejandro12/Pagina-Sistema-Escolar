@@ -35,3 +35,17 @@
         </table>
     </div>
 @endsection
+@section('js')
+    @if (session('create'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Docente creado',
+                showConfirmButton: true,
+                timer: 1500
+            }).then(function() {
+                location.reload();
+            });
+        </script>
+    @endif
+@endsection
